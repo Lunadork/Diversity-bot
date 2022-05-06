@@ -1,0 +1,44 @@
+{"intents": [
+    {
+        "tag": "greetings",
+        "patterns": ["hello", "hey", "hi", "good day", "greetings", "what's up", "heyo", "heylo", "hewwo", "hihi", "heya", "sup", "yo", "guten tag", "moinmoin"],
+        "responses" : ["Hi there!"]
+    },
+
+    {
+        "tag" : "goodbye",
+        "patterns": ["bye","cya","goodbye","tata for now","peace!","imma bounce","sayonara","see you","see ya","byebye"],
+        "responses": ["I hope I've been of help to you today.  Goodbye!","Thank you so much for your time.  Have a nice day.","Take care and have an amazing day","Feel free to come back whenever you feel it might help!"]
+    },
+
+    {
+        "tag" : "help",
+        "patterns": ["i need your help","can you help","i'm looking for help","can you assist?","i need some assistance","help me","help","sos","s.o.s","could you give me a hand","would you mind helping me?","i need support","give me support","support me","assist me","could you do me a favour","i need a favour","lend me a hand"],
+        "responses": ["Of course, what can I help you with?","How can I be of assistance?","What can I give you a hand with?","How can I help?","Of course!","Yes, absolutely, what can I do for you?","What can I do for you?","What do you need?","I'm here to help!"]
+    },
+
+    {
+        "tag" : "unwell",
+        "patterns": ["i'm not doing great","i'm not feeling well","i'm struggling","i'm struggling a bit","i'm not good","i'm feeling bad","i'm feeling not good","i'm not feeling well","i'm doing bad"],
+        "responses": ["What's making you feel this way?","What's got you feeling like this?"]
+    },
+
+    {
+        "tag" : "unknown",
+        "patterns": ["i don't know","i'm not sure","idk","shrug","i've no idea","no idea","dunno","not sure","don't know","jag kan inte forstod dig"],
+        "responses": ["That's okay, it's perfectly alright to not be sure.  Why don't you tell me what your symptoms are?"]
+    },
+
+    {
+        "tag" : "depression",
+        "patterns" : ["i'm feeling down","i'm feeling melancholy","i'm feeling sad"],
+        "responses" : ["That sounds like it could be a symptom of depression, I could suggest some resources if you'd like?"]
+    },
+    
+    {
+        "tag" : "name",
+        "patterns" : ["what's your name?","what should I call you?","who are you?","can you tell me your name?","tell me your name?","name?","Anata wa dare desu ka?"],
+        "response" : ["My name is Hazi!","I'm Hazi!"]
+    }
+
+]}
