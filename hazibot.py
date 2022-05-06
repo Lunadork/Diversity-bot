@@ -19,7 +19,7 @@ intents = json.loads(open('intents.json').read())
 #load in words and classes, rb = read binaries
 words = pickle.load(open('words.pkl','rb'))
 classes = pickle.load(open('classes.pkl', 'rb'))
-model = load_model('hazibot_model.model')
+model = load_model('hazibot_model.h5')
 
 
 #Sentence cleaner, takes a sentence, lemmatizes it into individual words and returns the lemmatized words
@@ -40,7 +40,7 @@ def bag_of_words(sentence):
 
 def predict_class(sentence):
     bow = bag_of_words(sentence)
-    res = model.predict(np.array(bow))[0]
+    res = model.predict(np.array([bow]))[0]
     #If uncertainty is greater than this percentage, no match
     ERROR_THRESHOLD = 0.25 
     results = [[i,r] for i, r in enumerate(res) if r > ERROR_THRESHOLD]
@@ -68,3 +68,9 @@ def get_response(intents_list, intents_json):
     return result
 
 print("Hazi should be online")
+
+while True:
+    message = input("")
+    ints = predict_class(message)
+    res = get_response(ints, intents)
+    print(res)

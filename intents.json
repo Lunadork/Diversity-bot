@@ -38,7 +38,7 @@
     {
         "tag" : "name",
         "patterns" : ["what's your name?","what should I call you?","who are you?","can you tell me your name?","tell me your name?","name?","Anata wa dare desu ka?"],
-        "response" : ["My name is Hazi!","I'm Hazi!"]
+        "responses" : ["My name is Hazi!","I'm Hazi!"]
     }
 
 ]}

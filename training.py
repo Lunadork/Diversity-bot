@@ -79,6 +79,10 @@ training = np.array(training)
 
 train_x = list(training[:,0])
 train_y = list(training[:,1])
+
+print("tr")
+print(train_x)
+print(train_y)
  
 ##NEURAL NETWORK MODEL SETUP - Dense sets up neurons.  I've no idea how this all works in reality.  I didn't do compsci xD
 model = Sequential()
