@@ -55,22 +55,33 @@ def predict_class(sentence):
 
     return return_list
 
+
 def get_response(intents_list, intents_json):
     #Get the tag and list of intents
     tag = intents_list[0]['intent']
     list_of_intents = intents_json['intents']
+
+   
     #find the right intent tag
     for i in list_of_intents:
         if i['tag'] == tag:
             #pick a random response from the options
-            result = random.choice(i['responses'])
+            if i['context']:
+                result = (random.choice(i['responses']), i['context'] )
+            else:
+                result = (random.choice(i['responses']), "none" )
+            
     #return the response
     return result
+
+
 
 print("Hazi should be online")
 
 while True:
     message = input("")
-    ints = predict_class(message)
-    res = get_response(ints, intents)
-    print(res)
+
+    predicted_intent = predict_class(message)
+    res = get_response(predicted_intent, intents)
+
+    print("Hazi: "+res[0])
