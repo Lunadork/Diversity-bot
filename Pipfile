@@ -8,6 +8,7 @@ numpy = "*"
 nltk = "*"
 tensorflow = "*"
 flask-cors = "*"
+flask = "*"
 
 [dev-packages]
 

@@ -12,17 +12,12 @@ def index():
 
 @server.route('/bot',methods=["POST"])
 def send_message():
-
     data = request.get_json()
-
-    print(data['message'])
-    
     predicted_intent = hazibot.predict_class(data['message'])
     res = hazibot.get_response(predicted_intent, hazibot.intents)
-
-    return res, 200
-
+    return res, 202
 
 
 
-server.run(debug=True) 
+if __name__ == "__main__":
+    server.run(debug=True) 
