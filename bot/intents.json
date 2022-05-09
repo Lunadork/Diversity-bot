@@ -3,7 +3,7 @@
         "tag": "nomatch",
         "patterns": [""],
         "responses" : ["I didn't quite understand that sorry.  I might not be able to help with or answer that!"],
-        "context" : "none"
+        "context" : "nomatch"
     },
     {
         "tag": "greetings",
@@ -11,68 +11,92 @@
         "responses" : ["Hi there! How can I help you?","Hello!  What can I do for you?","Greetings!  How can I be of assistance?"],
         "context" : "greeting"
     },
-
     {
         "tag" : "goodbye",
         "patterns": ["bye","cya","goodbye","tata for now","peace!","imma bounce","sayonara","see you","see ya","byebye"],
         "responses": ["I hope I've been of help to you today.  Goodbye!","Thank you so much for your time.  Have a nice day.","Take care and have an amazing day","Feel free to come back whenever you feel it might help!"],
         "context": "goodbye"
     },
-
+    {
+        "tag" : "agree",
+        "patterns":["yes","yes, please","please","please do","okay","I agree","That sounds good","Let's do that","okay, do it","do it","go for it","I'd like that","could you do that","please dp that","i'd like for you to do that","make it so","make it happen","go ahead","affirmative","sure","of course","I guess","Alright"],
+        "responses":["I'm sorry what were we talking about [Hazi is unsure of context, send \"stop\" to reset context, something has gone wrong or you have agree'd to something without hazi being aware of the context of what you were agreeing to]"],
+        "context":"agree"
+    },
+    {
+        "tag" : "disagree",
+        "patterns" : ["no","please no","i don't want that","i don't want those","I dont need those","I'd rather not","no thanks","that's okay, thanks","that's not necessary","nah","neh","nope","nup","nay","naw","noo","don't","dinnae do that","no way","certainly not","sorry, no","I won't","I shall not","I don't want to","I refuse","daga kotowaru"]
+    },
     {
         "tag" : "how_are_you",
         "patterns": ["how are you?","how's you?","how's it going?","how ya doing?","feeling okay?","how's things?","how's stuff going?","Are you well?","Are you doing okay?","Are you okay?","Are you feeling okay?"],
         "responses": ["I'm doing well, thank you.","Things are well with me, thank you.","I'm feeling great here, thanks for asking.","Doing very well, thank you!","I'm well, thank you."],
-        "context" : "none"
+        "context" : "how_are_you"
     },
-
     {
         "tag" : "features",
         "patterns" : ["what can you do?","what's your features?","how do you work?","how do I use you?","I'm not sure how you work","I don't know how to work you","I'm not sure how to use you","Tell me how you work?","What can I do with you?"],
         "responses" : ["You can talk to me about how you're doing, ask me about conditions such as depression and anxiety as well as questions about how to use this website"],
-        "context" : "none"
+        "context" : "features"
     },
-
     {
         "tag" : "help",
         "patterns": ["i need your help","can you help","i'm looking for help","can you assist?","i need some assistance","help me","help","sos","s.o.s","could you give me a hand","would you mind helping me?","i need support","give me support","support me","assist me","could you do me a favour","i need a favour","lend me a hand"],
         "responses": ["Of course, what can I help you with?","How can I be of assistance?","What can I give you a hand with?","How can I help?","Of course!","Yes, absolutely, what can I do for you?","What can I do for you?","What do you need?","I'm here to help!"],
-        "context": "assist"
+        "context": "help_nonspecific"
     },
-
     {
         "tag" : "unwell",
         "patterns": ["i'm not doing great","i'm not feeling well","i'm struggling","i'm struggling a bit","i'm not good","i'm feeling bad","i'm feeling not good","i'm not feeling well","i'm doing bad"],
         "responses": ["What's making you feel this way?","What's got you feeling like this?"],
-        "context": "diagnose"
+        "context": "unwell"
     },
-
     {
         "tag" : "unknown",
         "patterns": ["i don't know","i'm not sure","idk","shrug","i've no idea","no idea","dunno","not sure","don't know","jag kan inte forstod dig"],
         "responses": ["That's okay, it's perfectly alright to not be sure.  Why don't you tell me what your symptoms are?"],
-        "context" : "none"
+        "context" : "unknown"
     },
-
     {
         "tag" : "depression",
         "patterns" : ["i'm feeling down","i'm feeling melancholy","i'm feeling sad"],
         "responses" : ["That sounds like it could be a symptom of depression, I could suggest some resources if you'd like?"],
-        "context": "depression"
+        "context": "depression_offer_resources"
     },
-    
+    {
+        "tag" : "depression_resources",
+        "patterns" : ["I'd like some resources for depression","What can you tell me about depression?","What help can you be for depression","Help me with depression","I need help with depression","Please give me your resources for depression","depression resources","What resources do you have for depression","Send me what resources you have for depression","send over what resources you have for depression","give me your depression resources","resources for depression please"],
+        "responses" : ["Well, to start with I'd suggest reading the NHS page on depression, https://www.nhsinform.scot/illnesses-and-conditions/mental-health/depression.  It's generally best to speak with your GP if you've been experiencing symptoms of depression most of the day, every day for more than two weeks.  You can also find depression support groups on this website, as well as a depression support chatroom where you can talk to other users about your experiences.  If you're struggling with thoughts of self harm or suicide please immediately seek help - ask me for contact numbers for immediate help!"],
+        "context" : "depression_resources"
+    },
+    {
+        "tag" : "depression_ask",
+        "patterns" : ["I'd like to talk about depression","I think I might be depressed","Can we talk about depression?"],
+        "responses" : ["What's on your mind?  I'll do what I can!"],
+        "context" : "depression_talk"
+    },
+    {
+        "tag" : "anxiety",
+        "patterns" : ["I feel on edge","I can't seem to relax","I feel constantly anxious","I'm anxious"],
+        "responses" : ["That could be a symptom of an anxiety disorder.  Would you like me to suggest some resources?"],
+        "context" : "anxiety_offer_resources"
+    },
     {
         "tag" : "name",
         "patterns" : ["what's your name?","what should I call you?","who are you?","can you tell me your name?","tell me your name?","name?","Anata wa dare desu ka?"],
-        "responses" : ["My name is Hazi!","I'm Hazi!"],
-        "context" : "none"
+        "responses" : ["My name is Hazi!","I'm Hazi!","You can call me Hazi","Well, I go by Hazi!"],
+        "context" : "name"
     },
-
     {
         "tag" : "Patientno",
         "patterns" : ["Do you have many patients?","How many patients do you have","How many people do you deal with?"],
-        "responses" : ["Just you right now"],
-        "context" : "none"
+        "responses" : ["Just you right now","My attention is fully on you","You're my primary concern"],
+        "context" : "patients"
+    },
+    {
+        "tag" : "immediate_help",
+        "patterns" : ["I'm feeling suicidal","I want to self harm","I want to cut","I can't take anymore","I can't do this anymore","I'm going to kill myself","I'll kms","Guess I'll die","Guess I'll commit die","please kill me","how do I die?","can I die?","death would be nice","I wish I was dead","I don't want to live anymore","suicide.exe"],
+        "responses" : ["I'm afraid I cannot offer crisis assistance.  Please get in touch with your GP and/or samaritans on 116 123 or [insert more]"]
     }
 
 ]}

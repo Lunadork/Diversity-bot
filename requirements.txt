@@ -1,0 +1,9 @@
+Flask
+Flask-cors
+gunicorn
+Jinja2
+Werkzeug
+nltk
+https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.0.0-py3-none-any.whl
+scipy
+numpy
