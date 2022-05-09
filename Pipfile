@@ -9,6 +9,7 @@ nltk = "*"
 tensorflow = "*"
 flask-cors = "*"
 flask = "*"
+gunicorn = "*"
 
 [dev-packages]
 
