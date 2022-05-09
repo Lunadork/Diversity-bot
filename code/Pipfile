@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+numpy = "*"
+nltk = "*"
+tensorflow = "*"
+flask-cors = "*"
+flask = "*"
+psycopg2 = "*"
+flask-sqlalchemy = "*"
+postgres = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"
+
+[scripts]
+dev = "bash -c \"export FLASK_ENV='development' && flask run\""

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="../static/style.css" rel="stylesheet">
+    <title>Hazibot API</title>
+</head>
+<body>
+    <section class = "container shadow-lg pb-3 api-desc pt-3">
+        <section class = "title">
+            <h1>Hazibot API</h1>
+            <h2>By Henry, Arvin, Zeia and Ikenna</h2>
+        </section>
+        <br>
+        <h3>How to use</h3>
+        <br>
+        <p>To use send a JSON POST request to /bot </p>
+        <br>
+        <h4>Sending requests</h4>
+        <br>
+        <p>Your request body needs to contain the following:</p>
+        <p>{ "username" : "user_username", "message" : "the message content", "context" : [context] }</p>
+        <br>
+        <p>Username and message should be strings.</p>
+        <br>
+        <h4>Context</h4>
+        <br>
+        <p>Context is an array containing strings.</p>
+        <p>It is how Hazibot tracks where in a conversation they may be.</p>
+        <p>Send an array with one string value -> "none" for context in your initial message, i.e. "context" : ["none"]</p>
+        <br>
+        <h3>Hazibot's returns</h3>
+        <br>
+        <p>Hazibot will pass back a JSON object constructed as such:</p>
+        <p>{ "message" : "message content", "context" : [context], "expression" : 1 }</p>
+        <p>You should return the context Hazibot gives with any followup message your user also sends</p>
+        <br>
+        <h4>Expression</h4>
+        <br>
+        <p>Expression means the tone of Hazibot's reply</p>
+        <p>It will be returned as an integer that you can use on your frontend</p>
+        <br>
+        <ol>
+            <li>Means neutral</li>
+            <li>Means happy</li>
+            <li>Means sad</li>
+            <li>Means pensive</li>
+        </ol>
+        <br>
+        <p>Hazibot will store data the user passes in and recall based on username, so it must be unique.</p>
+        <p>There is currently no way to register users via a form and can only be done by speaking with Hazi via the Diversity MH app</p>
+        <br>
+        <p>Please let us know of any bugs/issues etc!</p>
+    </section>
+</body>
+</html>

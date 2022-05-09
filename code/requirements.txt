@@ -1,0 +1,8 @@
+numpy
+nltk
+tensorflow
+flask-cors
+flask
+psycopg2-binary
+flask-sqlalchemy
+postgres 
