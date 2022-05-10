@@ -9,6 +9,8 @@ nltk = "*"
 flask-cors = "*"
 flask = "*"
 tensorflow-cpu = "*"
+flask_sqlalchemy = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
