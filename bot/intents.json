@@ -1,13 +1,38 @@
 {"intents": [
     {
-        "tag": "nomatch",
+        "tag": "no_match",
         "patterns": [""],
-        "responses" : ["I didn't quite understand that sorry.  I might not be able to help with or answer that!"],
-        "context" : "nomatch"
+        "responses" : ["I didn't quite understand that sorry.  I might not be able to help with or answer that!  You could try wording your request in a different manner, or contacting my developers if you think I should be able to answer your query"],
+        "context" : "no_match",
+        "expression" : 1
+    },
+    {
+        "tag":"reset_context",
+        "patterns": ["stop","clear context","reset context","delete context","restart context","stahp"],
+        "responses": ["Okay, lets start over"],
+        "context" : "stop"
+    },
+    {
+        "tag":"vent_mode",
+        "patterns":["turn vent mode on","vent mode","venting mode","switch on vent mode","I'd like to vent","Can I vent to you?","I'd just like to vent","I'd like to get something off of my chest","I'd just like to rant","can I have a rant","would you mind if i ranted","would it be okay if I vented a little","can I vent?","Can I rant","I'd like to have a rant","I'd like to have a moan about something","Can I moan about something?"],
+        "responses": ["Of course, go right ahead","Absolutely","Please do","I'm here to listen"],
+        "context" : "vent_mode"
+    },
+    {
+        "tag":"user_negative_feedback",
+        "patterns":["That didn't make sense","That was dumb","That was stupid","Did you lose track of the conversation","are you dumb","are you stupid","did you make a mistake","I think you made a mistake","I think you lost context","I think you're confused","you got confused","you got lost","you are confused","you are lost"],
+        "responses" : ["I'm sorry, I'm very young as far as AI goes","Sorry about that, I make mistakes too sometimes","Sorry, I'm only human(ish)","I'm sorry about that, I'll learn more over time!"],
+        "context" : "negative_feedback"
+    },
+    {
+        "tag":"user_confused",
+        "patterns":["I don't know what you mean","idk what that means","I'm not sure what you mean","I'm sorry, I'm confused","I'm confused","Yikes what are you talking about?","what are you on about?","What's that supposed to mean?","what do you mean?","I don't understand"],
+        "responses" : ["I'm sorry, would you like me to repeat what I just said in a different way?"],
+        "context": "user_confused"
     },
     {
         "tag": "greetings",
-        "patterns": ["hello", "hey", "hi", "good day", "greetings", "what's up", "heyo", "heylo", "hewwo", "hihi", "heya", "sup", "yo", "guten tag", "moinmoin"],
+        "patterns": ["hello", "hey", "hi", "good day", "greetings", "what's up", "heyo", "heylo", "hewwo", "hihi", "heya", "sup", "yo", "guten tag", "moinmoin","heyhey","heyheyhey","hiya","howdy"],
         "responses" : ["Hi there! How can I help you?","Hello!  What can I do for you?","Greetings!  How can I be of assistance?"],
         "context" : "greeting"
     },
@@ -19,13 +44,15 @@
     },
     {
         "tag" : "agree",
-        "patterns":["yes","yes, please","please","please do","okay","I agree","That sounds good","Let's do that","okay, do it","do it","go for it","I'd like that","could you do that","please dp that","i'd like for you to do that","make it so","make it happen","go ahead","affirmative","sure","of course","I guess","Alright"],
-        "responses":["I'm sorry what were we talking about [Hazi is unsure of context, send \"stop\" to reset context, something has gone wrong or you have agree'd to something without hazi being aware of the context of what you were agreeing to]"],
-        "context":"agree"
+        "patterns":["yes, please","okay","i agree to that","that sounds good","let's do that","do it","go for it","make it so","make it happen","go ahead","affirmative","sure","course","i guess","alright", "of course","of course!, I can do that"],
+        "responses":["I'm sorry what were we talking about [ERROR - UNCAUGHT CONTEXT Hazi is unsure of context, send \"stop\" to reset context, something has gone wrong or you have agree'd to something without hazi being aware of the context of what you were agreeing to]"],
+        "context":"user_agree"
     },
     {
         "tag" : "disagree",
-        "patterns" : ["no","please no","i don't want that","i don't want those","I dont need those","I'd rather not","no thanks","that's okay, thanks","that's not necessary","nah","neh","nope","nup","nay","naw","noo","don't","dinnae do that","no way","certainly not","sorry, no","I won't","I shall not","I don't want to","I refuse","daga kotowaru"]
+        "patterns" : ["no","please no","i don't want that","i don't want those","I dont need those","I'd rather not","no thanks","that's okay, thanks","that's not necessary","nah","neh","nope","nup","nay","naw","noo","don't","dinnae do that","no way","certainly not","sorry, no","I won't","I shall not","I don't want to","I refuse","daga kotowaru"],
+        "responses":["I'm sorry what were we talking about [ERROR - UNCAUGHT CONTEXT Hazi is unsure of context, send \"stop\" to reset context, something has gone wrong or you have disagreed to something without hazi being aware of the context of what you were agreeing to]"],
+        "context":"user_disagree"
     },
     {
         "tag" : "how_are_you",
@@ -40,6 +67,18 @@
         "context" : "features"
     },
     {
+        "tag":"positive_affirmations",
+        "patterns":["I will take care of myself","I will take care of that","I will do that","I will","of course I will","I shall","Yes, doctor","yes, doc"],
+        "responses":["Glad to hear it!","Keep up the good work","You've got this","I believe in you"],
+        "context" :"user_agree"
+    },
+    {
+        "tag":"negative_affirmations",
+        "patterns":["I can't do that","I don't think I can","I won't do that","I won't","of course I can't","No, doctor","No, doc","I, of course, can't do that"],
+        "responses":["I understand, is there any way else I can be of help?"],
+        "context" :"user_disagree"
+    },
+    {
         "tag" : "help",
         "patterns": ["i need your help","can you help","i'm looking for help","can you assist?","i need some assistance","help me","help","sos","s.o.s","could you give me a hand","would you mind helping me?","i need support","give me support","support me","assist me","could you do me a favour","i need a favour","lend me a hand"],
         "responses": ["Of course, what can I help you with?","How can I be of assistance?","What can I give you a hand with?","How can I help?","Of course!","Yes, absolutely, what can I do for you?","What can I do for you?","What do you need?","I'm here to help!"],
@@ -47,7 +86,7 @@
     },
     {
         "tag" : "unwell",
-        "patterns": ["i'm not doing great","i'm not feeling well","i'm struggling","i'm struggling a bit","i'm not good","i'm feeling bad","i'm feeling not good","i'm not feeling well","i'm doing bad"],
+        "patterns": ["i'm not doing great","i'm not feeling well","i'm struggling","i'm struggling a bit","i'm not good","i'm feeling bad","i'm feeling not good","i'm not feeling well","i'm doing bad","I don't feel well"],
         "responses": ["What's making you feel this way?","What's got you feeling like this?"],
         "context": "unwell"
     },
@@ -59,7 +98,7 @@
     },
     {
         "tag" : "depression",
-        "patterns" : ["i'm feeling down","i'm feeling melancholy","i'm feeling sad"],
+        "patterns" : ["i'm feeling down","i'm feeling melancholy","i'm feeling sad", "i'm feeling depressed"],
         "responses" : ["That sounds like it could be a symptom of depression, I could suggest some resources if you'd like?"],
         "context": "depression_offer_resources"
     },
@@ -82,6 +121,12 @@
         "context" : "anxiety_offer_resources"
     },
     {
+        "tag" : "anxiety_resources",
+        "patterns" : ["I'd like some resources for anxiety","Can you tell me about anxiety?","Help me with my anxiety","I need help with anxiety","Please give me your resources for anxiety","anxiety resources"],
+        "responses" : ["Well, to start with I'd suggest reading the NHS page on anxiety, https://www.nhs.uk/mental-health/conditions/generalised-anxiety-disorder/overview/.  It's generally best to speak with your GP if you've been experiencing symptoms of anxiety most of the day, every day for more than two weeks.  You can also find anxiety support groups on this website, as well as a anxiety support chatroom where you can talk to other users about your experiences.  If you're struggling with thoughts of self harm or suicide please immediately seek help - ask me for contact numbers for immediate help!"],
+        "context" : "anxiety_resources"
+    },
+    {
         "tag" : "name",
         "patterns" : ["what's your name?","what should I call you?","who are you?","can you tell me your name?","tell me your name?","name?","Anata wa dare desu ka?"],
         "responses" : ["My name is Hazi!","I'm Hazi!","You can call me Hazi","Well, I go by Hazi!"],
@@ -96,7 +141,7 @@
     {
         "tag" : "immediate_help",
         "patterns" : ["I'm feeling suicidal","I want to self harm","I want to cut","I can't take anymore","I can't do this anymore","I'm going to kill myself","I'll kms","Guess I'll die","Guess I'll commit die","please kill me","how do I die?","can I die?","death would be nice","I wish I was dead","I don't want to live anymore","suicide.exe"],
-        "responses" : ["I'm afraid I cannot offer crisis assistance.  Please get in touch with your GP and/or samaritans on 116 123 or [insert more]"]
+        "responses" : ["I'm afraid I cannot offer crisis assistance.  Please get in touch with your GP and/or samaritans on 116 123 or [insert more]"],
+        "context" : "immediate_help"
     }
-
 ]}

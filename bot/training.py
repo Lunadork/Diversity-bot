@@ -6,9 +6,6 @@ import numpy as np
 
 #NTLK IMPORTS
 import nltk
-nltk.download('punkt')
-nltk.download('wordnet')
-nltk.download('omw-1.4')
 from nltk.stem import WordNetLemmatizer
 
 #TENSORFLOW IMPORTS
@@ -80,9 +77,6 @@ training = np.array(training)
 train_x = list(training[:,0])
 train_y = list(training[:,1])
 
-print("tr")
-print(train_x)
-print(train_y)
  
 ##NEURAL NETWORK MODEL SETUP - Dense sets up neurons.  I've no idea how this all works in reality.  I didn't do compsci xD
 model = Sequential()
@@ -100,6 +94,6 @@ sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 
 model.compile(loss='categorical_crossentropy', optimizer = sgd, metrics=['accuracy'])
 
-hist = model.fit(np.array(train_x), np.array(train_y), epochs=200, batch_size=5, verbose = 1 )
+hist = model.fit(np.array(train_x), np.array(train_y), epochs=400, batch_size=10, verbose = 1 )
 model.save('hazibot_model.h5', hist)
-print("done")
+print("Training complete")
