@@ -3,6 +3,7 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from bot import hazibot
 import psycopg2
+import asyncio
 
 
 server = Flask(__name__)
@@ -16,16 +17,17 @@ con = psycopg2.connect('postgresql://postgres:password@172.17.0.2/postgres')
 import dbsetup
 
 hazibot.setup()
-dbsetup.setup()
+# dbsetup.setup()
+dbsetup.debug()
 
 @server.route('/',methods=['GET'])
 def index():
     return render_template('index.html'),200
 
 @server.route('/bot',methods=['POST'])
-def send_message():
+async def send_message():
     data = request.get_json()
-    response = hazibot.hazibot_generate_response(data)
+    response = await hazibot.hazibot_generate_response(data)
     return response, 202
 
 @server.route('/cbt', methods = ['GET'])

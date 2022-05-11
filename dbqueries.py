@@ -1,7 +1,8 @@
 import server
+import asyncio
 
 #checks if user exists in database and returns false if they do (not new), true if they don't (is new)
-def check_if_new(username):
+async def check_if_new(username):
     with server.con:
         with server.con.cursor() as cursor:
             cursor.execute("SELECT * FROM users WHERE username = %s;",[username] )
@@ -13,7 +14,7 @@ def check_if_new(username):
                 return True
 
 #checks if user has a task and returns the task if they do, false if they don't.
-def check_if_has_task(username):
+async def check_if_has_task(username):
     with server.con:
         with server.con.cursor() as cursor:
             cursor.execute("SELECT * FROM users WHERE username = %s;",[username])
@@ -24,7 +25,7 @@ def check_if_has_task(username):
             else:
                 return False
 
-def check_primary_concern(username):
+async def check_primary_concern(username):
         with server.con:
             with server.con.cursor() as cursor:
                 cursor.execute("SELECT * FROM users WHERE username = %s;",[username])
@@ -34,29 +35,54 @@ def check_primary_concern(username):
                 else:
                     return False
 
-def get_preferred_name(username):
+async def get_preferred_name(username):
         with server.con:
             with server.con.cursor() as cursor:
                 cursor.execute("SELECT preferred_name FROM users WHERE username = %s;",[username])
 
                 rows = cursor.fetchall()
+                print("rows")
+                print(rows[0][0])
+                print("endrow")
                 return rows[0][0]
                 
-def set_task_done(username):
+async def set_task_done(username):
         with server.con:
             with server.con.cursor() as cursor:
-                cursor.execute("UPDATE users SET has_task = false WHERE username = %s",[username])
-                cursor.execute("UPDATE users SET task = %s WHERE username = %s",["Done",username])
+                try:
+                    cursor.execute("UPDATE users SET has_task = False WHERE username = %s;",[username])
+                    cursor.execute("UPDATE users SET task = %s WHERE username = %s;",["Done",username])
+                except:
+                    print("Failed to set user "+username+" task to done")
 
-def stop_task(username):  
+
+async def stop_task(username):  
         with server.con:
             with server.con.cursor() as cursor:
-                cursor.execute("UPDATE users SET has_task = false WHERE username = %s",[username])
-                cursor.execute("UPDATE users SET task = %s WHERE username = %s",["Stopped",username])
+                try:
+                    cursor.execute("UPDATE users SET has_task = False WHERE username = %s;",[username])
+                    cursor.execute("UPDATE users SET task = %s WHERE username = %s;",["Stopped",username])
+                except:
+                    print("Failed to set user "+username+" task to stopped and false")
 
-def set_cbt_task(username):
+async def set_cbt_task(username):
     with server.con:
         with server.con.cursor() as cursor:
-            cursor.execute("UPDATE users SET has_task = true WHERE username = %s",[username])
-            cursor.execute("UPDATE users SET task = %s WHERE username = %s",["CBT Excecises",username])
+            try:
+                cursor.execute("UPDATE users SET has_task = True WHERE username = %s;",[username])
+                cursor.execute("UPDATE users SET task = %s WHERE username = %s;",["CBT Excecises",username])
+            except:
+                print("Failed to set user "+username+" task to CBT Ex and True")
 
+async def add_user(username,prefname):
+    with server.con:
+        with server.con.cursor() as cursor:
+            
+            cursor.execute("""INSERT INTO users (username, preferred_name, has_task, task) 
+                                         VALUES (%s, %s, False, 'no');""",[username+"", prefname+""])
+
+            cursor.execute("SELECT * FROM users")
+            print("users:")
+            rows = cursor.fetchall()
+            for r in rows:
+                print(r)

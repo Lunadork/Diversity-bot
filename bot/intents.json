@@ -57,16 +57,16 @@
     },
     {
         "tag" : "agree",
-        "patterns":["yes, please","okay","i agree to that","that sounds good","let's do that","do it","go for it","make it so","make it happen","go ahead","affirmative","sure","course","i guess","alright", "of course","of course!, I can do that"],
+        "patterns":["yes","okay","please","yes, please","okay","i agree to that","that sounds good","let's do that","do it","go for it","make it so","make it happen","go ahead","affirmative","sure","course","i guess","alright", "of course","of course!, I can do that"],
         "responses":["I'm sorry what were we talking about [ERROR - UNCAUGHT CONTEXT Hazi is unsure of context, send \"stop\" to reset context, something has gone wrong or you have agree'd to something without hazi being aware of the context of what you were agreeing to]"],
-        "context":"user_agree",
+        "context":"agree",
         "expression" : 1
     },
     {
         "tag" : "disagree",
         "patterns" : ["no","please no","i don't want that","i don't want those","I dont need those","I'd rather not","no thanks","that's okay, thanks","that's not necessary","nah","neh","nope","nup","nay","naw","noo","don't","dinnae do that","no way","certainly not","sorry, no","I won't","I shall not","I don't want to","I refuse","daga kotowaru"],
         "responses":["I'm sorry what were we talking about [ERROR - UNCAUGHT CONTEXT Hazi is unsure of context, send \"stop\" to reset context, something has gone wrong or you have disagreed to something without hazi being aware of the context of what you were agreeing to]"],
-        "context":"user_disagree",
+        "context":"disagree",
         "expression" : 1
     },
     {
@@ -87,14 +87,14 @@
         "tag":"positive_affirmations",
         "patterns":["I will take care of myself","I will take care of that","I will do that","I will","of course I will","I shall","Yes, doctor","yes, doc"],
         "responses":["Glad to hear it!","Keep up the good work","You've got this","I believe in you, [username]"],
-        "context" :"user_agree",
+        "context" :"agree",
         "expression" : 1
     },
     {
         "tag":"negative_affirmations",
         "patterns":["I can't do that","I don't think I can","I won't do that","I won't","of course I can't","No, doctor","No, doc","I, of course, can't do that"],
         "responses":["I understand, is there any way else I can be of help?"],
-        "context" :"user_disagree",
+        "context" :"disagree",
         "expression" : 1
     },
     {
@@ -211,9 +211,9 @@
     },
     {
         "tag" : "done",
-        "patterns" : [ "I've done that","It's completed","Yup, that's been sorted","Yes, I did that","I got it done","I finished that","I did as you asked","I finished the task","The task is finished","I completed the task","Task done!"],
+        "patterns" : [ "I've done that","It's completed","Yup, that's been sorted","Yes, I did that","I got it done","I finished that","I did as you asked","I finished the task","The task is finished","I completed the task","Task done!","I did the task"],
         "responses" : ["Excellent, [username].  You did really well.  What can I do for you today?","That's great!  I'm proud of you, [username].  Now, how can I help you?","Well done, you're doing great, [username].  Now, what's brought you to me today?"],
-        "context" : "user_agree",
+        "context" : "agree",
         "expression" : 1
     },
     {
@@ -234,7 +234,21 @@
         "tag" : "thank",
         "patterns": ["Thanks, Hazi","Thank you","Thank you very much","I appreciate that","You're great, Hazi","You're a good bot","Thanks for all you do","Thanks, doc","Thankies","Ta","cheers"],
         "responses": ["Nothing to thank me for.  Just remember to look after yourself","The one doing all the hard work here is you, [username], just keep it up!"],
-        "context" : "user_thank",
+        "context" : "thank",
+        "expression" : 1
+    },
+    {
+        "tag" : "get_user_preferred_name",
+        "patterns": [""],
+        "responses": ["I don't think we've spoken before, [username].  What name should I call you? (respond with only preferred name, this cannot be changed)"],
+        "context" : "get_user_preferred_name",
+        "expression" : 1
+    },
+    {
+        "tag" : "got_user_preferred_name",
+        "patterns" : "",
+        "responses" : ["Great, I'll call you that from now on, [username]!"],
+        "context" : "got_user_preferred_name",
         "expression" : 1
     }
 ]}

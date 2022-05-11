@@ -41,11 +41,19 @@ def setup():
                                                                                        ('Anxiety','https://www.nhsinform.scot/illnesses-and-conditions/mental-health/anxiety','CBT Exercises'),
                                                                                        ('Social Isolation','https://www.nhsinform.scot/illnesses-and-conditions/mental-health/mental-health-self-help-guides/social-anxiety-self-help-guide','CBT, chatroom');""")
 
-            # cursor.execute("SELECT * FROM users")
-            # print("users:")
-            # rows = cursor.fetchall()
-            # for r in rows:
-            #     print(r)
+            
+            
+            
+            
+            
+def debug():
+    with con:
+        with con.cursor() as cursor:            
+            cursor.execute("SELECT * FROM users")
+            print("users:")
+            rows = cursor.fetchall()
+            for r in rows:
+                print(r)
 
             # cursor.execute("SELECT * FROM conditions")
             # print("conditions:")

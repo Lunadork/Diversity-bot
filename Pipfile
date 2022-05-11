@@ -11,6 +11,7 @@ flask = "*"
 tensorflow-cpu = "*"
 flask_sqlalchemy = "*"
 psycopg2-binary = "*"
+aioflask = "*"
 
 [dev-packages]
 
