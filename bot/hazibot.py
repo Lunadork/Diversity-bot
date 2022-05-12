@@ -206,7 +206,7 @@ async def hazibot_generate_response(input):
                 return res
 
     #last context was "get_user_preferred_name" > "Start" -> user has been asked for their preferred name.        
-    elif input['context'][ len(input['context'])-2 ] == "get_user_preferred_name" and input['context'][ len(input['context'])-3 ] == "Start":
+    elif input['context'][ len(input['context'])-1 ] == "get_user_preferred_name" and input['context'][ len(input['context'])-3 ] == "Start":
         print("user gave pref name")
         name = input['message']
         await db.add_user(input['username'],name)
