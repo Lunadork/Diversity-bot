@@ -15,28 +15,28 @@
     },
     {
         "tag":"reset_context",
-        "patterns": ["stop","clear context","reset context","delete context","restart context","stahp"],
+        "patterns": ["stop","clear context","reset context","delete context","restart context","stahp","stop_flow"],
         "responses": ["Okay, lets start over"],
         "context" : "stop",
         "expression" : 1
     },
     {
         "tag":"vent_mode",
-        "patterns":["turn vent mode on","vent mode","venting mode","switch on vent mode","I'd like to vent","Can I vent to you?","I'd just like to vent","I'd like to get something off of my chest","I'd just like to rant","can I have a rant","would you mind if i ranted","would it be okay if I vented a little","can I vent?","Can I rant","I'd like to have a rant","I'd like to have a moan about something","Can I moan about something?"],
+        "patterns":["turn vent mode on","vent mode","venting mode","switch on vent mode","i'd like to vent","can i vent to you?","i'd just like to vent","i'd like to get something off of my chest","i'd just like to rant","can I have a rant","would you mind if i ranted","would it be okay if i vented a little","can i vent?","Can i rant","i'd like to have a rant","i'd like to have a moan about something","Can i moan about something?"],
         "responses": ["Of course, go right ahead","Absolutely","Please do","I'm here to listen"],
         "context" : "vent_mode",
         "expression" : 1
     },
     {
         "tag":"user_negative_feedback",
-        "patterns":["That didn't make sense","That was dumb","That was stupid","Did you lose track of the conversation","are you dumb","are you stupid","did you make a mistake","I think you made a mistake","I think you lost context","I think you're confused","you got confused","you got lost","you are confused","you are lost"],
+        "patterns":["that didn't make sense","that was dumb","that was stupid","did you lose track of the conversation","are you dumb","are you stupid","did you make a mistake","i think you made a mistake","i think you lost context","i think you're confused","you got confused","you got lost","you are confused","you are lost"],
         "responses" : ["I'm sorry, I'm very young as far as AI goes","Sorry about that, I make mistakes too sometimes","Sorry, I'm only human(ish)","I'm sorry about that, I'll learn more over time!"],
         "context" : "negative_feedback",
         "expression" : 1
     },
     {
         "tag":"user_confused",
-        "patterns":["I don't know what you mean","idk what that means","I'm not sure what you mean","I'm sorry, I'm confused","I'm confused","Yikes what are you talking about?","what are you on about?","What's that supposed to mean?","what do you mean?","I don't understand"],
+        "patterns":["i don't know what you mean","idk what that means","i'm not sure what you mean","i'm sorry, i'm confused","i'm confused","yikes what are you talking about?","what are you on about?","what's that supposed to mean?","what do you mean?","i don't understand"],
         "responses" : ["I'm sorry, would you like me to repeat what I just said in a different way?"],
         "context": "user_confused",
         "expression" : 1
@@ -57,42 +57,42 @@
     },
     {
         "tag" : "agree",
-        "patterns":["yes","okay","please","yes, please","okay","i agree to that","that sounds good","let's do that","do it","go for it","make it so","make it happen","go ahead","affirmative","sure","course","i guess","alright", "of course","of course!, I can do that"],
+        "patterns":["yes","okay","please","yes, please","okay","i agree to that","that sounds good","let's do that","do it","go for it","make it so","make it happen","go ahead","affirmative","sure","course","i guess","alright", "of course","of course!, i can do that"],
         "responses":["I'm sorry what were we talking about [ERROR - UNCAUGHT CONTEXT Hazi is unsure of context, send \"stop\" to reset context, something has gone wrong or you have agree'd to something without hazi being aware of the context of what you were agreeing to]"],
         "context":"agree",
         "expression" : 1
     },
     {
         "tag" : "disagree",
-        "patterns" : ["no","please no","i don't want that","i don't want those","I dont need those","I'd rather not","no thanks","that's okay, thanks","that's not necessary","nah","neh","nope","nup","nay","naw","noo","don't","dinnae do that","no way","certainly not","sorry, no","I won't","I shall not","I don't want to","I refuse","daga kotowaru"],
+        "patterns" : ["no","please no","i don't want that","i don't want those","i dont need those","i'd rather not","no thanks","that's okay, thanks","that's not necessary","nah","neh","nope","nup","nay","naw","noo","don't","dinnae do that","no way","certainly not","sorry, no","i won't","i shall not","i don't want to","i refuse","daga kotowaru"],
         "responses":["I'm sorry what were we talking about [ERROR - UNCAUGHT CONTEXT Hazi is unsure of context, send \"stop\" to reset context, something has gone wrong or you have disagreed to something without hazi being aware of the context of what you were agreeing to]"],
         "context":"disagree",
         "expression" : 1
     },
     {
         "tag" : "how_are_you",
-        "patterns": ["how are you?","how's you?","how's it going?","how ya doing?","feeling okay?","how's things?","how's stuff going?","Are you well?","Are you doing okay?","Are you okay?","Are you feeling okay?"],
+        "patterns": ["how are you?","how's you?","how's it going?","how ya doing?","feeling okay?","how's things?","how's stuff going?","are you well?","are you doing okay?","are you okay?","are you feeling okay?"],
         "responses": ["I'm doing well, thank you.","Things are well with me, thank you.","I'm feeling great here, thanks for asking.","Doing very well, thank you!","I'm well, thank you."],
         "context" : "how_are_you",
         "expression" : 1
     },
     {
         "tag" : "features",
-        "patterns" : ["what can you do?","what's your features?","how do you work?","how do I use you?","I'm not sure how you work","I don't know how to work you","I'm not sure how to use you","Tell me how you work?","What can I do with you?"],
+        "patterns" : ["what can you do?","what's your features?","how do you work?","how do I use you?","i'm not sure how you work","i don't know how to work you","i'm not sure how to use you","tell me how you work?","what can I do with you?"],
         "responses" : ["You can talk to me about how you're doing, ask me about conditions such as depression and anxiety as well as questions about how to use this website"],
         "context" : "features"
         ,"expression" : 1
     },
     {
         "tag":"positive_affirmations",
-        "patterns":["I will take care of myself","I will take care of that","I will do that","I will","of course I will","I shall","Yes, doctor","yes, doc"],
+        "patterns":["i will take care of myself","i will take care of that","i will do that","i will","of course i will","i shall","yes, doctor","yes, doc"],
         "responses":["Glad to hear it!","Keep up the good work","You've got this","I believe in you, [username]"],
         "context" :"agree",
         "expression" : 1
     },
     {
         "tag":"negative_affirmations",
-        "patterns":["I can't do that","I don't think I can","I won't do that","I won't","of course I can't","No, doctor","No, doc","I, of course, can't do that"],
+        "patterns":["i can't do that","i don't think i can","i won't do that","i won't","of course i can't","No, doctor","No, doc","i, of course, can't do that"],
         "responses":["I understand, is there any way else I can be of help?"],
         "context" :"disagree",
         "expression" : 1
@@ -100,13 +100,13 @@
     {
         "tag" : "help",
         "patterns": ["i need your help","can you help","i'm looking for help","can you assist?","i need some assistance","help me","help","sos","s.o.s","could you give me a hand","would you mind helping me?","i need support","give me support","support me","assist me","could you do me a favour","i need a favour","lend me a hand"],
-        "responses": ["Of course, what can I help you with?","How can I be of assistance?","What can I give you a hand with?","How can I help?","Of course!","Yes, absolutely, what can I do for you?","What can I do for you?","What do you need?","I'm here to help!"],
-        "context": "help_nonspecific",
+        "responses": ["Of course, what can I help you with?","How can I be of assistance?","What can I give you a hand with?","How can I help?","Of course!  What's the matter?","Yes, absolutely, what can I do for you?","What can I do for you?","What do you need?","I'm here to help! What's wrong, [username]?"],
+        "context": "help",
         "expression" : 1
     },
     {
         "tag" : "unwell",
-        "patterns": ["i'm not doing great","i'm not feeling well","i'm struggling","i'm struggling a bit","i'm not good","i'm feeling bad","i'm feeling not good","i'm not feeling well","i'm doing bad","I don't feel well"],
+        "patterns": ["i'm not doing great","i'm not feeling well","i'm struggling","i'm struggling a bit","i'm not good","i'm feeling bad","i'm feeling not good","i'm not feeling well","i'm doing bad","i don't feel well"],
         "responses": ["What's making you feel this way?","What's got you feeling like this?"],
         "context": "unwell",
         "expression" : 1
@@ -120,77 +120,77 @@
     },
     {
         "tag" : "depression",
-        "patterns" : ["i'm feeling down","i'm feeling melancholy","i'm feeling sad", "i'm feeling depressed"],
+        "patterns" : ["i'm feeling down","i'm feeling melancholy","i'm feeling sad", "i'm feeling depressed","i guess I feel a bit down","i feel a bit sad"],
         "responses" : ["That sounds like it could be a symptom of depression, I could suggest some resources if you'd like?"],
         "context": "depression_offer_resources",
         "expression" : 1
     },
     {
         "tag" : "depression_resources",
-        "patterns" : ["I'd like some resources for depression","What can you tell me about depression?","What help can you be for depression","Help me with depression","I need help with depression","Please give me your resources for depression","depression resources","What resources do you have for depression","Send me what resources you have for depression","send over what resources you have for depression","give me your depression resources","resources for depression please"],
+        "patterns" : ["i'd like some resources for depression","what can you tell me about depression?","what help can you be for depression","help me with depression","i need help with depression","please give me your resources for depression","depression resources","what resources do you have for depression","send me what resources you have for depression","send over what resources you have for depression","give me your depression resources","resources for depression please"],
         "responses" : ["Well, to start with I'd suggest reading the NHS page on depression, https://www.nhsinform.scot/illnesses-and-conditions/mental-health/depression.  It's generally best to speak with your GP if you've been experiencing symptoms of depression most of the day, every day for more than two weeks.  You can also find depression support groups on this website, as well as a depression support chatroom where you can talk to other users about your experiences.  If you're struggling with thoughts of self harm or suicide please immediately seek help - ask me for contact numbers for immediate help!  I could suggest a task to look into that might help!  Could I tell you about it?"],
         "context" : "depression_resources",
         "expression" : 1
     },
     {
         "tag" : "task_accept",
-        "patterns": ["I'd like a task","please give mne a task","A task sounds good","What kind of task is it?"],
+        "patterns": ["i'd like a task","please give mne a task","a task sounds good","what kind of task is it?"],
         "responses" : ["What I have in mind is CBT excercises, or cognitive behavioural therapy excercises.  They can be very helpful.  Would you like me to tell you more?"],
         "context" : "agree",
         "expression" : 1
     },
     {
         "tag" : "cbt_info",
-        "patterns" : ["What are CBT Excercises?","Tell me about CBT excercises","Please, I don't know what they are","I've never heard of those before","Could you tell me about those CBT excercises?","CBT sounds good","Tell me more about CBT","Tell me more about it"],
+        "patterns" : ["what are cbt excercises?","tell me about cbt excercises","please, i don't know what they are","i've never heard of those before","could you tell me about those cbt excercises?","cbt sounds good","tell me more about cbt","tell me more about it"],
         "responses" : ["Well, I've actually written a guide for that!  If you navigate your browser to http://localhost:5000/cbt there's a guide to the excercise I have in mind.  Open it in a new window to keep this conversation going and when you've had a look - let me know if that sounds good to you!"],
-        "context" : "agree_cbt",
+        "context" : "agree",
         "expression" : 1
     },
     {
         "tag" : "cbt_set_task",
-        "patterns" : ["The cbt excercise sounds good","I like the cbt exercise","I'll do the cbt excercise","Yes to the cbt excercise","Let's do the cbt excecise"],
+        "patterns" : ["the cbt excercise sounds good","i like the cbt exercise","i'll do the cbt excercise","yes to the cbt excercise","let's do the cbt excecise"],
         "responses" : ["Great, I'll set that as an excercise for you to do before we next speak, [username].  Is there anything else I can help you with in the meantime?"],
         "context" : "task_set",
         "expression" : 1
     },
     {
         "tag" : "depression_ask",
-        "patterns" : ["I'd like to talk about depression","I think I might be depressed","Can we talk about depression?"],
+        "patterns" : ["i'd like to talk about depression","i think i might be depressed","can we talk about depression?"],
         "responses" : ["What's on your mind?  I'll do what I can!"],
         "context" : "depression_talk",
         "expression" : 1
     },
     {
         "tag" : "anxiety",
-        "patterns" : ["I feel on edge","I can't seem to relax","I feel constantly anxious","I'm anxious"],
+        "patterns" : ["i feel on edge","i can't seem to relax","i feel constantly anxious","i'm anxious"],
         "responses" : ["That could be a symptom of an anxiety disorder.  Would you like me to suggest some resources?"],
         "context" : "anxiety_offer_resources",
         "expression" : 1
     },
     {
         "tag" : "anxiety_resources",
-        "patterns" : ["I'd like some resources for anxiety","Can you tell me about anxiety?","Help me with my anxiety","I need help with anxiety","Please give me your resources for anxiety","anxiety resources"],
+        "patterns" : ["i'd like some resources for anxiety","can you tell me about anxiety?","help me with my anxiety","i need help with anxiety","please give me your resources for anxiety","anxiety resources"],
         "responses" : ["Well, to start with I'd suggest reading the NHS page on anxiety, https://www.nhs.uk/mental-health/conditions/generalised-anxiety-disorder/overview/.  It's generally best to speak with your GP if you've been experiencing symptoms of anxiety most of the day, every day for more than two weeks.  You can also find anxiety support groups on this website, as well as a anxiety support chatroom where you can talk to other users about your experiences.  If you're struggling with thoughts of self harm or suicide please immediately seek help - ask me for contact numbers for immediate help!"],
         "context" : "anxiety_resources",
         "expression" : 1
     },
     {
         "tag" : "name",
-        "patterns" : ["what's your name?","what should I call you?","who are you?","can you tell me your name?","tell me your name?","name?","Anata wa dare desu ka?"],
+        "patterns" : ["what's your name?","what should I call you?","who are you?","can you tell me your name?","tell me your name?","name?","anata wa dare desu ka?"],
         "responses" : ["My name is Hazi!","I'm Hazi!","You can call me Hazi","Well, I go by Hazi!"],
         "context" : "name",
         "expression" : 1
     },
     {
         "tag" : "patientno",
-        "patterns" : ["Do you have many patients?","How many patients do you have","How many people do you deal with?"],
+        "patterns" : ["ho you have many patients?","how many patients do you have","how many people do you deal with?"],
         "responses" : ["Just you right now","My attention is fully on you","You're my primary concern"],
         "context" : "patients",
         "expression" : 1
     },
     {
         "tag" : "immediate_help",
-        "patterns" : ["I'm feeling suicidal","I want to self harm","I want to cut","I can't take anymore","I can't do this anymore","I'm going to kill myself","I'll kms","Guess I'll die","Guess I'll commit die","please kill me","how do I die?","can I die?","death would be nice","I wish I was dead","I don't want to live anymore","suicide.exe"],
+        "patterns" : ["i'm feeling suicidal","i want to self harm","i want to cut","i can't take anymore","i can't do this anymore","i'm going to kill myself","i'll kms","Guess i'll die","Guess i'll commit die","please kill me","how do i die?","can i die?","death would be nice","i wish i was dead","i don't want to live anymore","suicide.exe"],
         "responses" : ["I'm afraid I cannot offer crisis assistance.  Please get in touch with your GP and/or samaritans on 116 123 or [insert more]"],
         "context" : "immediate_help",
         "expression" : 1
@@ -211,28 +211,28 @@
     },
     {
         "tag" : "done",
-        "patterns" : [ "I've done that","It's completed","Yup, that's been sorted","Yes, I did that","I got it done","I finished that","I did as you asked","I finished the task","The task is finished","I completed the task","Task done!","I did the task"],
+        "patterns" : [ "i've done that","it's completed","Yup, that's been sorted","Yes, i did that","i got it done","i finished that","i did as you asked","i finished the task","The task is finished","i completed the task","task done!","i did the task"],
         "responses" : ["Excellent, [username].  You did really well.  What can I do for you today?","That's great!  I'm proud of you, [username].  Now, how can I help you?","Well done, you're doing great, [username].  Now, what's brought you to me today?"],
         "context" : "agree",
         "expression" : 1
     },
     {
         "tag" : "task_not_done",
-        "patterns" : ["I didn't finish the task","I didn't finish it","I couldn't complete the task","I can't complete it","I can't do the task"," It's not done","It's not completed","It isn't done","It isn't completed","Task not done","Task failed"],
+        "patterns" : ["i didn't finish the task","i didn't finish it","i couldn't complete the task","i can't complete it","i can't do the task","it's not done","it's not completed","it isn't done","it isn't completed","task not done","task failed"],
         "responses" : ["That's okay, [username].  Would you like to take a pause on the task for now?","Don't worry about it, these things can be hard.  Would you like to pause the task for now?","You're doing your best.  Would you prefer if I put that task on pause in the meantime?"],
         "context" : "disagree",
         "expression" : 1
     },
     {
         "tag" : "stop_task",
-        "patterns": ["Please stop the task","I need a break from the task","Stop the task","Pause the task","put a hold on the task","stop the task temporarily","Pause my task for now"],
+        "patterns": ["please stop the task","i need a break from the task","stop the task","pause the task","put a hold on the task","stop the task temporarily","pause my task for now"],
         "responses" : ["Okay, we'll put that on pause for the time being.  Is there anything else I can help you with?"],
         "context" : "agree",
         "expression" : 1
     },
     {
         "tag" : "thank",
-        "patterns": ["Thanks, Hazi","Thank you","Thank you very much","I appreciate that","You're great, Hazi","You're a good bot","Thanks for all you do","Thanks, doc","Thankies","Ta","cheers"],
+        "patterns": ["thanks, hazi","thank you","thank you very much","i appreciate that","you're great, hazi","you're a good bot","thanks for all you do","thanks, doc","thankies","ta","cheers"],
         "responses": ["Nothing to thank me for.  Just remember to look after yourself","The one doing all the hard work here is you, [username], just keep it up!"],
         "context" : "thank",
         "expression" : 1
@@ -250,5 +250,12 @@
         "responses" : ["Great, I'll call you that from now on, [username]!"],
         "context" : "got_user_preferred_name",
         "expression" : 1
+    },
+    {
+        "tag": "agree_resources",
+        "patterns" : ["Please send me your resources","I'd like to see your resources","Send me your resources","Send over your resources"],
+        "responses" : "",
+        "context" : "agree",
+        "expression": 1
     }
 ]}

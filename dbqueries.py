@@ -68,11 +68,14 @@ async def stop_task(username):
 async def set_cbt_task(username):
     with server.con:
         with server.con.cursor() as cursor:
-            try:
-                cursor.execute("UPDATE users SET has_task = True WHERE username = %s;",[username])
-                cursor.execute("UPDATE users SET task = %s WHERE username = %s;",["CBT Excecises",username])
-            except:
-                print("Failed to set user "+username+" task to CBT Ex and True")
+            cursor.execute("""UPDATE users SET has_task = 'True' WHERE username = 'anon2';""")
+            cursor.execute("""UPDATE users SET task = %s WHERE username = %s""",['CBT Excercises',username+""])
+            print("updooted " +username + "with cbt task") 
+
+
+
+
+                
 
 async def add_user(username,prefname):
     with server.con:

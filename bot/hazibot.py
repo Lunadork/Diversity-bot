@@ -50,7 +50,7 @@ def predict_class(sentence):
     bow = bag_of_words(sentence)
     res = model.predict(np.array([bow]))[0]
     #If uncertainty is greater than this percentage, no match
-    ERROR_THRESHOLD = 0.50 
+    ERROR_THRESHOLD = 0.25 
     results = [[i,r] for i, r in enumerate(res) if r > ERROR_THRESHOLD]
 
     #Sort our results to be highest probability first
@@ -67,7 +67,10 @@ def predict_class(sentence):
 
 
 
-def get_response(predicted_intent, intents_json, context, username,task = 'not_set'):
+async def get_response(predicted_intent, intents_json, context, username,task = 'not_set'):
+
+    print("context")
+    print(context)
 
     #if predicted_intent is a string we've overrode AI interpretation due to conversation context flow, tag = predicted_intent
     if isinstance(predicted_intent, str):
@@ -98,21 +101,27 @@ def get_response(predicted_intent, intents_json, context, username,task = 'not_s
     for i in list_of_intents:
         if i['tag'] == tag:
             #pick a random response from the options for that tag
-            context.append(i['context'])
+
             choice = random.choice(i['responses'])
+            # context.append(i['context'])
+            print('context before do')
 
             if bool(task) == False:
                 task = 'nothing'
 
-            if db.check_if_new(username) == False:
-                username = db.get_preferred_name(username)
+            check = await db.check_if_new(username)
+
+            if check == False:
+                username = await db.get_preferred_name(username)
                 message = choice.replace("[username]",username+"").replace("[task]",task+"")
                 result = { "message" : message, "context" :  context, "expression" : 1 } 
                 #return the response
                 return result
-            elif db.check_if_new(username) == True:
+            elif check == True:
+                message = choice.replace("[username]",username+"").replace("[task]",task+"")
                 result = { "message" : message, "context" :  context, "expression" : 1 }
                 return result
+
 
             message = choice.replace("[username]",username+"").replace("[task]",task+"")
             result = { "message" : message, "context" :  context, "expression" : 1 }
@@ -123,10 +132,39 @@ def get_response(predicted_intent, intents_json, context, username,task = 'not_s
 async def hazibot_generate_response(input):
 
     predicted_intent = predict_class(input['message'].lower())
+    tag = predicted_intent[0]['intent']
+
+    list_of_intents = intents['intents']
+
+    for i in list_of_intents:
+
+        if i['tag'] == tag:
+            #get current contest
+            choice = random.choice(i['responses'])
+            context.append(i['context'])
+            print('context before do')
+            input['context'].append(i['context'])
+    
 
     username = ""
 
+    print("context input top of gen")
+    print(input['context'])
+
+    # print("context + pred context")
+    # resp = await get_response(predicted_intent,intents,input['context'],username)
+    # print(resp['context'])
+
+    # print("contexta after mutate")
+    # print(input['context'])
+
+    # context.append(input['context'])
+    
+
+    
+
     is_new = await db.check_if_new(input['username'])
+
     if is_new == False:
         print("isn'tnew")
         username = await db.get_preferred_name(input['username'])
@@ -134,8 +172,12 @@ async def hazibot_generate_response(input):
         print("isnew")
         username = input['username']
 
+    print("u1")
+    print(input['context'])
+
+
     #If last entry in context is "Start", it's a new convo, do the startup procedure
-    if input['context'][ len(input['context'])-1 ] == "Start":
+    if input['context'][ len(input['context'])-2 ] == "Start":
         #Check if the user is new
         is_new = await db.check_if_new(input['username'])
         #if is new start the new user procedure
@@ -143,7 +185,8 @@ async def hazibot_generate_response(input):
             
             ##user is new, get their preferred name and add to db.
             predicted_intent = "get_user_preferred_name"
-            res = get_response(predicted_intent,intents,input['context'],username)
+            print("getting user pref name")
+            res = await get_response(predicted_intent,intents,input['context'],username)
             return res
 
         else:         
@@ -153,20 +196,23 @@ async def hazibot_generate_response(input):
             print(task)
             #if task isn't false, there's a task, ask if user done task
             if task != False:
+                print("asking user if done task")
                 predicted_intent = "start_check_task"
-                res = get_response(predicted_intent,intents,input['context'],username,task)
+                res = await get_response(predicted_intent,intents,input['context'],username,task)
                 return res
             #No task, resume normal flow
             else:
-                res = get_response(predicted_intent,intents,input['context'],username,task)
+                res = await get_response(predicted_intent,intents,input['context'],username,task)
                 return res
 
     #last context was "get_user_preferred_name" > "Start" -> user has been asked for their preferred name.        
-    elif input['context'][ len(input['context'])-1 ] == "get_user_preferred_name" and input['context'][ len(input['context'])-2 ] == "Start":
+    elif input['context'][ len(input['context'])-2 ] == "get_user_preferred_name" and input['context'][ len(input['context'])-3 ] == "Start":
+        print("user gave pref name")
         name = input['message']
         await db.add_user(input['username'],name)
         predicted_intent = "got_user_preferred_name"
-        res = get_response(predicted_intent,intents,input['context'],username)
+        usern = await db.get_preferred_name(username)
+        res = await get_response(predicted_intent,intents,input['context'],usern)
         return res
     
     #If last entry in context is "check_task" the user has been asked to, get predicted intent - if it's agree - user did it.  if disagree - user did not
@@ -176,53 +222,64 @@ async def hazibot_generate_response(input):
         ##if user did the task
         if predicted_intent[0]['intent'] == "agree":
             predicted_intent = "task_done"
-            res=get_response(predicted_intent, intents,input['context'], username)
+            print("task done")
+            res= await get_response(predicted_intent, intents,input['context'], username)
             await db.set_task_done(username)
             return res
 
         #if user didn't do the task
         if predicted_intent[0]['intent'] == "disagree":
+            print("task not done")
             predicted_intent = "task_not_done"
-            res=get_response(predicted_intent,intents,input['context'],username)
+            res= await get_response(predicted_intent,intents,input['context'],username)
             return res
 
 
     #If user wants to change the task - last context agree, previous context disagree, context before check_task
-    elif input['context'][ len(input['context'])-1 ] == "agree" or input['context'][ len(input['context'])-1 ] == "user_agree" and input['context'][ len(input['context'])-2 ] == "disagree" and input['context'][ len(input['context'])-3 ] == "check_task":
+    elif input['context'][ len(input['context'])-1 ] == "agree" and input['context'][ len(input['context'])-2 ] == "disagree" and input['context'][ len(input['context'])-3 ] == "check_task":
         predicted_intent = "stop_task"
+        print("stopping task")
         await db.stop_task(username)
-        res = get_response(predicted_intent,intents,input['context'],username)
+        res = await get_response(predicted_intent,intents,input['context'],username)
         return res
 
     #if last context was agree and context before that was agree, then before that depression resources, user agreed to hear about task
     elif input['context'][ len(input['context'])-1 ] == "agree" and input['context'][ len(input['context'])-2 ] == "agree" and input['context'][ len(input['context'])-3 ] == "depression_resources":
+        print("user hear about cbt")
         predicted_intent = "cbt_info"
-        res = get_response(predicted_intent,intents,input['context'],username)
+        res = await get_response(predicted_intent,intents,input['context'],username)
         return res
 
-    #if last context was agree or agree_cbt > agree > agree > depression resources, user agreed to cbt task
-    elif input['context'][ len(input['context'])-1 ] == "agree" or input['context'][ len(input['context'])-1 ] == "agree_cbt"  and input['context'][ len(input['context'])-2 ] == "agree" and input['context'][ len(input['context'])-3 ] == "agree" and input['context'][ len(input['context'])-4 ] == "depression_resources":
+    #if last context was agree > agree > agree > depression resources, user agreed to cbt task
+    elif input['context'][ len(input['context'])-1 ] == "agree" and input['context'][ len(input['context'])-2 ] == "agree" and input['context'][ len(input['context'])-3 ] == "agree" and input['context'][ len(input['context'])-4 ] == "depression_offer_resources":
+        print("user set task cbt")
         predicted_intent = "cbt_set_task"
-        res = get_response(predicted_intent,intents,input['context'],username)
+        res = await get_response(predicted_intent,intents,input['context'],username)
         await db.set_cbt_task(username)
         return res
     
+    #if last context agree, one before was depression_offer_resources, user wants resources
+    elif input['context'][ len(input['context'])-1 ] == "agree" and input['context'][ len(input['context'])-2 ] == "depression_offer_resources":
+        print("user want resources dep")
+        predicted_intent="depression_resources"
+        res = await get_response(predicted_intent,intents,input['context'],username)
+        return res
 
     else:
+        print("no flow match continue normal")
         predicted_intent = predict_class(input['message'])
-        res = get_response(predicted_intent,intents,input['context'],input['username'])
+        res = await get_response(predicted_intent,intents,input['context'],input['username'])
         return res
 
 
-
+    print("didn't find match in flow")
+    print(input)
     predicted_intent = predict_class(input['message'])
-    res = get_response(predicted_intent,intents,input['context'],input['username'])
+    res = await get_response(predicted_intent,intents,input['context'],input['username'])
     return res
 
 def setup():
     print("Hazi online")
-
-
 
 
 

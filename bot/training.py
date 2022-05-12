@@ -78,10 +78,10 @@ train_x = list(training[:,0])
 train_y = list(training[:,1])
 
  
-##NEURAL NETWORK MODEL SETUP - Dense sets up neurons.  I've no idea how this all works in reality.  I didn't do compsci xD
+##NEURAL NETWORK MODEL SETUP 
 model = Sequential()
 #Create 128 neurons, tie shape to length of words to train
-model.add(Dense(128, input_shape=(len(train_x[0]),), activation = 'relu'))
+model.add(Dense(300, input_shape=(len(train_x[0]),), activation = 'relu'))
 model.add(Dropout(0.5))
 #Create another layer of neurons
 model.add(Dense(64, activation = 'relu'))
@@ -89,11 +89,12 @@ model.add(Dropout(0.5))
 #Create another layer, to the length of our classes to train on.  Activation is scaling settings
 model.add(Dense(len(train_y[0]), activation = 'softmax'))
 
-# Idk what any of this means but it's needed for the model optimizer.  
+# Model optimisation settings
 sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 
 model.compile(loss='categorical_crossentropy', optimizer = sgd, metrics=['accuracy'])
 
-hist = model.fit(np.array(train_x), np.array(train_y), epochs=400, batch_size=10, verbose = 1 )
+# START TRAINING!
+hist = model.fit(np.array(train_x), np.array(train_y), epochs=900, batch_size=30, verbose = 1 )
 model.save('hazibot_model.h5', hist)
 print("Training complete")
